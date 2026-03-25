@@ -16,10 +16,23 @@ class elavator:
             self.floorup()
         while self.currentfloor>desfloor:
             self.floordown()
-
+class Building:
+    def __init__(self,floortop,floorbottom,elavatorsnumb):
+        self.topfloor=floortop
+        self.bottomfloor=floorbottom
+        self.elavators=[]
+        for i in range(elavatorsnumb):
+            new_elavator=elavator(self.bottomfloor,self.topfloor)
+            self.elavators.append(new_elavator)
+    def elavator_move(self,elavator,targetedfloor):
+        print (f"\n Now moving elavator{elavator} to floor {targetedfloor}")
+        elavator_order=elavator-1
+        the_elevator = self.elavators[elavator_order]
+        the_elevator.targetfloor(targetedfloor)
         
-ela=elavator(1,9)
-print(f"Elevator starts at floor {ela.currentfloor}")
-
-ela.targetfloor(7)
-ela.targetfloor(ela.bottomfloor)
+building1 = Building(12,1,4)
+building1.elavator_move(1, 12)
+building1.elavator_move(2, 15)
+building1.elavator_move(1, 10)
+building1.elavator_move(2, 11)
+        

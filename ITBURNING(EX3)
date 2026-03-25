@@ -1,0 +1,50 @@
+class elavator:
+    def __init__(self,bottom_floor,top_floor):
+        self.currentfloor=bottom_floor
+        self.bottomfloor=bottom_floor
+        self.topfloor=top_floor
+    def floorup(self):
+        if self.currentfloor<self.topfloor:
+            self.currentfloor += 1
+            print(f"Moving up rn ... Thank you for waiting , the currerent floor is {self.currentfloor}")
+    def floordown(self):
+        if self.currentfloor>self.bottomfloor:
+            self.currentfloor -= 1
+            print(f"Moving down rn ... Thank you for waiting , the currerent floor is {self.currentfloor}")
+    def targetfloor(self,desfloor):
+        while self.currentfloor<desfloor:
+            self.floorup()
+        while self.currentfloor>desfloor:
+            self.floordown()
+class Building:
+    def __init__(self,floortop,floorbottom,elavatorsnumb):
+        self.topfloor=floortop
+        self.bottomfloor=floorbottom
+        self.elavators=[]
+        for i in range(elavatorsnumb):
+            new_elavator=elavator(self.bottomfloor,self.topfloor)
+            self.elavators.append(new_elavator)
+    def elavator_move(self,elavator,targetedfloor):
+        print (f"\n Now moving elavator{elavator} to floor {targetedfloor}")
+        elavator_order=elavator-1
+        the_elevator = self.elavators[elavator_order]
+        the_elevator.targetfloor(targetedfloor)
+        
+
+
+    def fire_alarm(self):
+        print("\n HOLY S***,IT'S F***** BURNING, WALK DOWN THE EMERGENCY STAIR NOW AND DON'T EVEN THINK ABOUT USING THE ELAVATOR")
+        print("\n All elavator are moving to ground floor")
+        for elavator in self.elavators:
+            elavator.targetfloor(self.bottomfloor)
+        print("\n All elavators have been moved to the ground floor, you better walk faster")
+print("Normal building activity , nothing will go wrong")      
+building1 = Building(12, 1, 4)
+building1.elavator_move(1, 10)
+building1.elavator_move(2, 5)
+building1.elavator_move(1, 1)
+building1.elavator_move(2, 1)
+
+building1.elavator_move(1, 8)
+building1.elavator_move(2, 6)
+building1.fire_alarm()
